@@ -1,0 +1,39 @@
+# 筋斗云SSR登录并签到
+# 工作名称
+name: kulissrlogin_sign
+
+on:
+  # 在推送到master分支时会自动运行一次
+  push:
+    branches: 
+      - master
+  # 可以设定定时任务执行
+  schedule:
+    # UTC0点30定期执行一次，跟北京时间大概相距8小时，但因为排队可能会稍微延后半小时左右
+    # 即北京时间8点30以后
+    - cron: '30 0 * * *'
+
+
+jobs:
+  # arctime_auto_sign为job_id，后续如果有多个job可以引用  
+  kulissr_auto_sign:
+    
+    # 指定运行在哪台机器上
+    runs-on: ubuntu-latest
+
+    # 该job的操作步骤
+    steps:
+    # 将本仓库的代码拉取一份到虚拟环境机器上
+    - name: Checkout
+      uses: actions/checkout@v2
+    # 配置安装python环境
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8.2
+    # 配置安装依赖包
+    - name: Install requirements
+      run: pip install -r requirements.txt
+    # 运行python脚本文件，其中的参数取secrets中配置的SCKEY
+    - name: Working
+      run: python paoluz.py ${{ secrets.USER }} ${{ secrets.PASS }} ${{ secrets.SCKEY }}
