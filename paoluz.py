@@ -4,9 +4,9 @@ import requests
 import re
 import json
 
-loginurl = 'https://paoluz.link/auth/login'
-userurl = 'https://paoluz.link/user'
-signurl = 'https://paoluz.link/user/checkin'
+loginurl = 'https://cyooo.co/auth/login'
+userurl = 'https://cyooo.co/user'
+signurl = 'https://cyooo.co/user/checkin'
 
 
 def login_sign(loginurl,userurl,userdata,signurl,SCKEY):
